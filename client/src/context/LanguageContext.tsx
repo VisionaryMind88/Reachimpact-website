@@ -71,9 +71,33 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     if (key === 'hero.description') return 'ReachImpact uses advanced AI technology to automate your sales and marketing calls, helping you generate more leads, schedule meetings, and improve sales effectiveness—all without lifting a finger.';
     if (key === 'trustedBy.title') return 'Trusted by forward-thinking companies';
     if (key === 'features.title') return 'Powerful Features That Drive Results';
-    if (key === 'footer.products.title') return 'Products';
-    if (key === 'footer.resources.title') return 'Resources';
-    if (key === 'footer.company.title') return 'Company';
+    if (key === 'solutions.title') return 'Tailored Solutions For Every Industry';
+    if (key === 'pricing.title') return 'Simple, Transparent Pricing';
+    if (key === 'testimonials.title') return 'What Our Customers Say';
+    if (key === 'nav.features') return 'Features';
+    if (key === 'nav.pricing') return 'Pricing';
+    if (key === 'nav.solutions') return 'Solutions';
+    if (key === 'nav.testimonials') return 'Testimonials';
+    if (key === 'nav.blog') return 'Blog';
+    if (key === 'nav.requestDemo') return 'Request Demo';
+    if (key === 'nav.buyMinutes') return 'Buy Call Minutes';
+    if (key === 'nav.language') return 'Language';
+    if (key === 'nav.contact') return 'Contact';
+    
+    // Footer Sections
+    if (key === 'footer.productTitle') return 'Products';
+    if (key === 'footer.resourcesTitle') return 'Resources';
+    if (key === 'footer.companyTitle') return 'Company';
+    if (key === 'footer.allRightsReserved') return 'All rights reserved.';
+    if (key === 'footer.terms') return 'Terms of Service';
+    if (key === 'footer.privacy') return 'Privacy Policy';
+    if (key === 'footer.cookies') return 'Cookie Policy';
+    if (key === 'footer.documentation') return 'Documentation';
+    if (key === 'footer.guides') return 'Guides';
+    if (key === 'footer.support') return 'Support';
+    if (key === 'footer.about') return 'About Us';
+    if (key === 'footer.careers') return 'Careers';
+    if (key === 'footer.partners') return 'Partners';
     
     console.warn(`No translation found for key: ${key}`);
     // If all else fails, return the key (but with a distinctive format to identify missing translations)
