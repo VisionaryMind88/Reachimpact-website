@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 154 94% 42%;
+    --secondary-foreground: 155 40% 98%;
+    --accent: 226 100% 66%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 217 91% 60%;
+    --radius: 0.5rem;
+    
+    /* Neutral colors */
+    --neutral-50: 0 0% 98%;
+    --neutral-100: 0 0% 96%;
+    --neutral-200: 0 0% 90%;
+    --neutral-300: 0 0% 83%;
+    --neutral-400: 0 0% 64%;
+    --neutral-500: 0 0% 45%;
+    --neutral-600: 0 0% 32%;
+    --neutral-700: 0 0% 23%;
+    --neutral-800: 0 0% 15%;
+    --neutral-900: 0 0% 9%;
+  }
+ 
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 154 94% 42%;
+    --secondary-foreground: 155 40% 98%;
+    --accent: 226 100% 66%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-accent font-bold;
+  }
+}
+
+.font-sans {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-accent {
+  font-family: 'Poppins', sans-serif;
+}
+
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 md:px-6 lg:px-8;
+  }
+  
+  .gradient-primary {
+    @apply bg-gradient-to-br from-primary to-accent;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-primary/90 transition duration-300 text-center;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 bg-secondary text-white font-medium rounded-md hover:bg-secondary/90 transition duration-300 text-center;
+  }
+  
+  .btn-outline {
+    @apply px-6 py-3 border border-primary text-primary font-medium rounded-md hover:bg-primary/5 transition duration-300 text-center;
+  }
+}
