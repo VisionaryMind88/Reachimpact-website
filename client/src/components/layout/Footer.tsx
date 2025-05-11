@@ -41,37 +41,37 @@ const Footer = () => {
 
           {/* Products */}
           <div>
-            <h4 className="font-bold text-lg mb-4">{t('footer.products.title')}</h4>
+            <h4 className="font-bold text-lg mb-4">{t('footer.products.title') || 'Products'}</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item1')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item2')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item3')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item4')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item5')}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item1') || 'AI Calling Platform'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item2') || 'Appointment Setting'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item3') || 'Lead Generation'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item4') || 'Analytics Dashboard'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.products.item5') || 'API & Integrations'}</a></li>
             </ul>
           </div>
 
           {/* Resources */}
           <div>
-            <h4 className="font-bold text-lg mb-4">{t('footer.resources.title')}</h4>
+            <h4 className="font-bold text-lg mb-4">{t('footer.resources.title') || 'Resources'}</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item1')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item2')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item3')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item4')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item5')}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item1') || 'Case Studies'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item2') || 'Blog'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item3') || 'eBooks & Guides'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item4') || 'Webinars'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.resources.item5') || 'FAQ'}</a></li>
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h4 className="font-bold text-lg mb-4">{t('footer.company.title')}</h4>
+            <h4 className="font-bold text-lg mb-4">{t('footer.company.title') || 'Company'}</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.company.item1')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.company.item2')}</a></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.company.item3')}</a></li>
-              <li><Link href="/contact" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.company.item4')}</Link></li>
-              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.company.item5')}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.company.item1') || 'About Us'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.company.item2') || 'Careers'}</a></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.company.item3') || 'Partners'}</a></li>
+              <li><Link href="/contact"><div className="text-neutral-400 hover:text-white transition-colors duration-150 cursor-pointer">{t('footer.company.item4') || 'Contact Us'}</div></Link></li>
+              <li><a href="#" className="text-neutral-400 hover:text-white transition-colors duration-150">{t('footer.company.item5') || 'Privacy Policy'}</a></li>
             </ul>
           </div>
         </div>
@@ -79,12 +79,12 @@ const Footer = () => {
         <div className="border-t border-neutral-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <p className="text-neutral-500">© {currentYear} ReachImpact. {t('footer.copyright')}</p>
+              <p className="text-neutral-500">© {currentYear} ReachImpact. {t('footer.copyright') || 'All rights reserved.'}</p>
             </div>
             <div className="flex items-center space-x-4">
-              <a href="#" className="text-neutral-500 hover:text-white transition-colors duration-150">{t('footer.privacy')}</a>
-              <a href="#" className="text-neutral-500 hover:text-white transition-colors duration-150">{t('footer.terms')}</a>
-              <a href="#" className="text-neutral-500 hover:text-white transition-colors duration-150">{t('footer.cookies')}</a>
+              <a href="#" className="text-neutral-500 hover:text-white transition-colors duration-150">{t('footer.privacy') || 'Privacy Policy'}</a>
+              <a href="#" className="text-neutral-500 hover:text-white transition-colors duration-150">{t('footer.terms') || 'Terms of Service'}</a>
+              <a href="#" className="text-neutral-500 hover:text-white transition-colors duration-150">{t('footer.cookies') || 'Cookie Policy'}</a>
             </div>
           </div>
         </div>
