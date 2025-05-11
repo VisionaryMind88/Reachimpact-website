@@ -137,7 +137,7 @@ const ChatWidget = () => {
                   type="submit" 
                   className="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-primary/90"
                 >
-                  <i className="fas fa-paper-plane"></i>
+                  <FaPaperPlane />
                 </Button>
               </form>
             </div>
@@ -149,7 +149,7 @@ const ChatWidget = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-16 h-16 bg-primary rounded-full shadow-lg flex items-center justify-center text-white hover:bg-primary/90 transition duration-300"
       >
-        <i className={`fas ${isOpen ? 'fa-times' : 'fa-comment-alt'} text-2xl`}></i>
+        {isOpen ? <FaTimes className="text-2xl" /> : <FaComment className="text-2xl" />}
       </Button>
     </div>
   );

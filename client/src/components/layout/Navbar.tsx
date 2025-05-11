@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
+import { FaRobot } from 'react-icons/fa';
 
 const Navbar = () => {
   const [, setLocation] = useLocation();
@@ -33,7 +34,7 @@ const Navbar = () => {
           <Link href="/">
             <div className="flex items-center space-x-2 cursor-pointer">
               <div className="text-primary text-3xl">
-                <i className="fas fa-robot"></i>
+                <FaRobot />
               </div>
               <span className="font-accent font-bold text-xl md:text-2xl text-neutral-800">
                 Reach<span className="text-primary">Impact</span>
