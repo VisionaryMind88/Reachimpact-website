@@ -5,17 +5,13 @@ import {
   defaultLanguage, 
   supportedLanguages 
 } from '@/types';
-import { 
-  getTranslations, 
-  getTranslationValue, 
-  detectBrowserLanguage
-} from '@/lib/i18n';
+import { getTranslations, getTranslationValue, detectBrowserLanguage } from '@/lib/i18n';
 
 // Create the context with a default value
 const LanguageContext = createContext<LanguageContextType>({
   language: defaultLanguage,
   setLanguage: () => {},
-  t: (key: string) => undefined,
+  t: (key: string) => key,
   languages: supportedLanguages
 });
 
@@ -46,32 +42,25 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     }
   };
 
-  // Translation function with robust fallback handling
-  const t = (key: string): string | undefined => {
-    // If key is empty or not a string, return empty string
-    if (!key || typeof key !== 'string') {
-      return '';
-    }
-    
-    // Try to get the translation for the current language
+  // Translation function
+  const t = (key: string): string => {
     const value = getTranslationValue(language, key);
-    
-    // If found, return it
-    if (value !== undefined && value !== null) {
-      return String(value);
-    }
-    
-    // If not found in current language, try default language as fallback
-    if (language !== defaultLanguage) {
-      const defaultValue = getTranslationValue(defaultLanguage, key);
-      if (defaultValue !== undefined && defaultValue !== null) {
-        return String(defaultValue);
+    if (value === undefined) {
+      console.warn(`Translation key "${key}" not found in ${language} locale`);
+      
+      // Fall back to default language
+      if (language !== defaultLanguage) {
+        const defaultValue = getTranslationValue(defaultLanguage, key);
+        if (defaultValue !== undefined) {
+          return defaultValue as string;
+        }
       }
+      
+      // If still not found, return the key itself
+      return key;
     }
     
-    // Return undefined and let the components handle fallbacks with || operators
-    console.warn(`No translation found for key: ${key}`);
-    return undefined;
+    return value as string;
   };
 
   // Update document language attribute when language changes

@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FaRobot, FaUser, FaPaperPlane, FaComment, FaTimes } from 'react-icons/fa';
 
 type Message = {
   id: number;
@@ -73,7 +72,7 @@ const ChatWidget = () => {
             <div className="bg-primary text-white px-4 py-4 flex justify-between items-center">
               <div className="flex items-center">
                 <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                  <FaRobot />
+                  <i className="fas fa-robot"></i>
                 </div>
                 <div>
                   <h3 className="font-medium">{t('chat.title')}</h3>
@@ -99,7 +98,7 @@ const ChatWidget = () => {
                   {message.sender === 'bot' && (
                     <div className="flex-shrink-0 mr-3">
                       <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center text-primary">
-                        <FaRobot className="text-sm" />
+                        <i className="fas fa-robot text-sm"></i>
                       </div>
                     </div>
                   )}
@@ -115,7 +114,7 @@ const ChatWidget = () => {
                   {message.sender === 'user' && (
                     <div className="flex-shrink-0 ml-3">
                       <div className="w-8 h-8 rounded-full bg-neutral-300 flex items-center justify-center text-neutral-600">
-                        <FaUser className="text-sm" />
+                        <i className="fas fa-user text-sm"></i>
                       </div>
                     </div>
                   )}
@@ -137,7 +136,7 @@ const ChatWidget = () => {
                   type="submit" 
                   className="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-primary/90"
                 >
-                  <FaPaperPlane />
+                  <i className="fas fa-paper-plane"></i>
                 </Button>
               </form>
             </div>
@@ -149,7 +148,7 @@ const ChatWidget = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-16 h-16 bg-primary rounded-full shadow-lg flex items-center justify-center text-white hover:bg-primary/90 transition duration-300"
       >
-        {isOpen ? <FaTimes className="text-2xl" /> : <FaComment className="text-2xl" />}
+        <i className={`fas ${isOpen ? 'fa-times' : 'fa-comment-alt'} text-2xl`}></i>
       </Button>
     </div>
   );

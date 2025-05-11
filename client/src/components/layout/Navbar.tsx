@@ -9,7 +9,6 @@ import {
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
-import { FaRobot } from 'react-icons/fa';
 
 const Navbar = () => {
   const [, setLocation] = useLocation();
@@ -17,11 +16,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: '/features', label: t('nav.features') || 'Features' },
-    { href: '/pricing', label: t('nav.pricing') || 'Pricing' },
-    { href: '/solutions', label: t('nav.solutions') || 'Solutions' },
-    { href: '/testimonials', label: t('nav.testimonials') || 'Testimonials' },
-    { href: '/blog', label: t('nav.blog') || 'Blog' }
+    { href: '/features', label: t('nav.features') },
+    { href: '/pricing', label: t('nav.pricing') },
+    { href: '/solutions', label: t('nav.solutions') },
+    { href: '/testimonials', label: t('nav.testimonials') },
+    { href: '/blog', label: t('nav.blog') }
   ];
 
   const closeSheet = () => setIsOpen(false);
@@ -32,27 +31,23 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/">
-            <div className="flex items-center space-x-2 cursor-pointer">
+            <a className="flex items-center space-x-2">
               <div className="text-primary text-3xl">
-                <FaRobot />
+                <i className="fas fa-robot"></i>
               </div>
               <span className="font-accent font-bold text-xl md:text-2xl text-neutral-800">
                 Reach<span className="text-primary">Impact</span>
               </span>
-            </div>
+            </a>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
-                <div className="text-neutral-600 hover:text-primary font-medium transition duration-150 cursor-pointer">
-                  {link.label || (link.href === '/features' ? 'Features' : 
-                    link.href === '/pricing' ? 'Pricing' : 
-                    link.href === '/solutions' ? 'Solutions' : 
-                    link.href === '/testimonials' ? 'Testimonials' : 
-                    link.href === '/blog' ? 'Blog' : 'Link')}
-                </div>
+                <a className="text-neutral-600 hover:text-primary font-medium transition duration-150">
+                  {link.label}
+                </a>
               </Link>
             ))}
           </div>
@@ -62,15 +57,15 @@ const Navbar = () => {
             <LanguageSelector />
             
             <Link href="/request-demo">
-              <div className="inline-flex items-center px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 transition duration-150 cursor-pointer">
-                {t('nav.requestDemo') || 'Request Demo'}
-              </div>
+              <a className="inline-flex items-center px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 transition duration-150">
+                {t('nav.requestDemo')}
+              </a>
             </Link>
             
             <Link href="/buy-minutes">
-              <div className="inline-flex items-center px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 transition duration-150 cursor-pointer">
-                {t('nav.buyMinutes') || 'Buy Call Minutes'}
-              </div>
+              <a className="inline-flex items-center px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 transition duration-150">
+                {t('nav.buyMinutes')}
+              </a>
             </Link>
           </div>
 
@@ -85,40 +80,36 @@ const Navbar = () => {
               <nav className="flex flex-col gap-4 pt-4">
                 {navLinks.map((link) => (
                   <Link key={link.href} href={link.href}>
-                    <div 
-                      className="block px-3 py-2 text-neutral-600 hover:bg-primary-50 hover:text-primary rounded-md cursor-pointer"
+                    <a 
+                      className="block px-3 py-2 text-neutral-600 hover:bg-primary-50 hover:text-primary rounded-md"
                       onClick={closeSheet}
                     >
-                      {link.label || (link.href === '/features' ? 'Features' : 
-                        link.href === '/pricing' ? 'Pricing' : 
-                        link.href === '/solutions' ? 'Solutions' : 
-                        link.href === '/testimonials' ? 'Testimonials' : 
-                        link.href === '/blog' ? 'Blog' : 'Link')}
-                    </div>
+                      {link.label}
+                    </a>
                   </Link>
                 ))}
                 <div className="pt-4 flex flex-col space-y-3">
                   <div className="px-3">
                     <label htmlFor="language-select" className="block text-sm font-medium text-neutral-700 mb-1">
-                      {t('nav.language') || 'Language'}
+                      {t('nav.language')}
                     </label>
                     <LanguageSelector mobile />
                   </div>
                   <Link href="/request-demo">
-                    <div 
-                      className="mx-3 px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 text-center cursor-pointer"
+                    <a 
+                      className="mx-3 px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 text-center"
                       onClick={closeSheet}
                     >
-                      {t('nav.requestDemo') || 'Request Demo'}
-                    </div>
+                      {t('nav.requestDemo')}
+                    </a>
                   </Link>
                   <Link href="/buy-minutes">
-                    <div 
-                      className="mx-3 px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 text-center cursor-pointer"
+                    <a 
+                      className="mx-3 px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 text-center"
                       onClick={closeSheet}
                     >
-                      {t('nav.buyMinutes') || 'Buy Call Minutes'}
-                    </div>
+                      {t('nav.buyMinutes')}
+                    </a>
                   </Link>
                 </div>
               </nav>
