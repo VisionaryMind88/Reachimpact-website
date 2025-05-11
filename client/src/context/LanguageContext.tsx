@@ -1,105 +1,150 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { 
-  SupportedLanguage, 
-  LanguageContextType, 
-  defaultLanguage, 
-  supportedLanguages 
-} from '@/types';
-import { 
-  getTranslations, 
-  getTranslationValue, 
-  detectBrowserLanguage
-} from '@/lib/i18n';
+import { SupportedLanguage, defaultLanguage, supportedLanguages } from '@/types';
+import en from '@/locales/en';
+import nl from '@/locales/nl';
+import de from '@/locales/de';
+import es from '@/locales/es';
+import fr from '@/locales/fr';
 
-// Create the context with a default value
+// All locale data
+const locales = {
+  en: en || {},
+  nl: nl || {},
+  de: de || {},
+  es: es || {},
+  fr: fr || {},
+};
+
+type LocaleKey = keyof typeof locales;
+
+// Fallback English translations for critical UI elements
+const fallbacks = {
+  'nav.features': 'Features',
+  'nav.pricing': 'Pricing',
+  'nav.solutions': 'Solutions',
+  'nav.testimonials': 'Testimonials',
+  'nav.blog': 'Blog',
+  'nav.requestDemo': 'Request Demo',
+  'nav.buyMinutes': 'Buy Call Minutes',
+  'nav.language': 'Language',
+  'nav.contact': 'Contact',
+  'hero.title': 'Revolutionize Your',
+  'hero.titleHighlight': 'Outreach',
+  'hero.description': 'ReachImpact uses advanced AI technology to automate your sales and marketing calls, helping you generate more leads, schedule meetings, and improve sales effectiveness—all without lifting a finger.',
+  'hero.requestDemo': 'Request Demo',
+  'hero.buyMinutes': 'Buy Call Minutes',
+};
+
+// Type for context
+interface LanguageContextType {
+  language: SupportedLanguage;
+  setLanguage: (lang: SupportedLanguage) => void;
+  t: (key: string) => string;
+  languages: typeof supportedLanguages;
+}
+
+// Create context with default values
 const LanguageContext = createContext<LanguageContextType>({
   language: defaultLanguage,
   setLanguage: () => {},
-  t: (key: string) => undefined,
-  languages: supportedLanguages
+  t: (key: string) => key,
+  languages: supportedLanguages,
 });
+
+// Helper function to get nested property
+function getNestedValue(obj: any, path: string): any {
+  if (!obj || !path) return undefined;
+  
+  const keys = path.split('.');
+  let current = obj;
+  
+  for (const key of keys) {
+    if (current === undefined || current === null) return undefined;
+    current = current[key];
+  }
+  
+  return current;
+}
 
 interface LanguageProviderProps {
   children: ReactNode;
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  // Initialize with the user's preferred language or the default
+  // Get initial language from localStorage or browser
   const [language, setLanguageState] = useState<SupportedLanguage>(() => {
-    // Try to get the language from localStorage
-    const savedLang = localStorage.getItem('language');
-    if (savedLang && Object.keys(supportedLanguages).includes(savedLang)) {
-      return savedLang as SupportedLanguage;
+    const saved = localStorage.getItem('language');
+    if (saved && Object.keys(supportedLanguages).includes(saved)) {
+      return saved as SupportedLanguage;
     }
     
-    // Otherwise detect browser language
-    return detectBrowserLanguage();
+    try {
+      const browserLang = navigator.language.split('-')[0];
+      if (Object.keys(supportedLanguages).includes(browserLang)) {
+        return browserLang as SupportedLanguage;
+      }
+    } catch (e) {
+      console.warn('Error detecting browser language');
+    }
+    
+    return defaultLanguage;
   });
 
-  // Function to change the language
+  // Update language in localStorage when changed
   const setLanguage = (lang: SupportedLanguage) => {
     if (Object.keys(supportedLanguages).includes(lang)) {
       setLanguageState(lang);
       localStorage.setItem('language', lang);
-    } else {
-      console.warn(`Language "${lang}" not supported`);
     }
   };
 
-  // Translation function with robust fallback handling
-  const t = (key: string): string | undefined => {
-    // If key is empty or not a string, return empty string
-    if (!key || typeof key !== 'string') {
-      return '';
-    }
+  // Translation function with fallbacks
+  const t = (key: string): string => {
+    if (!key) return '';
     
-    // Try to get the translation for the current language
-    const value = getTranslationValue(language, key);
+    // Try current language
+    const value = getNestedValue(locales[language as LocaleKey], key);
+    if (value !== undefined) return String(value);
     
-    // If found, return it
-    if (value !== undefined && value !== null) {
-      return String(value);
-    }
-    
-    // If not found in current language, try default language as fallback
+    // Try default language as fallback
     if (language !== defaultLanguage) {
-      const defaultValue = getTranslationValue(defaultLanguage, key);
-      if (defaultValue !== undefined && defaultValue !== null) {
-        return String(defaultValue);
-      }
+      const defaultValue = getNestedValue(locales[defaultLanguage], key);
+      if (defaultValue !== undefined) return String(defaultValue);
     }
     
-    // Return undefined and let the components handle fallbacks with || operators
-    console.warn(`No translation found for key: ${key}`);
-    return undefined;
+    // Use hardcoded fallbacks for critical UI elements
+    if (key in fallbacks) {
+      return fallbacks[key as keyof typeof fallbacks];
+    }
+    
+    // Return key as last resort
+    return key;
   };
 
-  // Update document language attribute when language changes
+  // Update html lang attribute
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
-  const value = {
+  const contextValue = {
     language,
     setLanguage,
     t,
-    languages: supportedLanguages
+    languages: supportedLanguages,
   };
 
   return (
-    <LanguageContext.Provider value={value}>
+    <LanguageContext.Provider value={contextValue}>
       {children}
     </LanguageContext.Provider>
   );
 };
 
-// Custom hook to use the language context
-export const useLanguage = () => {
+// Custom hook for using language context
+export function useLanguage() {
   const context = useContext(LanguageContext);
-  
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
-  
   return context;
-};
+}

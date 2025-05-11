@@ -45,15 +45,17 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <div className="text-neutral-600 hover:text-primary font-medium transition duration-150 cursor-pointer">
-                  {link.label || (link.href === '/features' ? 'Features' : 
-                    link.href === '/pricing' ? 'Pricing' : 
-                    link.href === '/solutions' ? 'Solutions' : 
-                    link.href === '/testimonials' ? 'Testimonials' : 
-                    link.href === '/blog' ? 'Blog' : 'Link')}
-                </div>
-              </Link>
+              <div 
+                key={link.href} 
+                className="text-neutral-600 hover:text-primary font-medium transition duration-150 cursor-pointer"
+                onClick={() => setLocation(link.href)}
+              >
+                {link.label || (link.href === '/features' ? 'Features' : 
+                  link.href === '/pricing' ? 'Pricing' : 
+                  link.href === '/solutions' ? 'Solutions' : 
+                  link.href === '/testimonials' ? 'Testimonials' : 
+                  link.href === '/blog' ? 'Blog' : 'Link')}
+              </div>
             ))}
           </div>
 
@@ -61,17 +63,19 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center space-x-4">
             <LanguageSelector />
             
-            <Link href="/request-demo">
-              <div className="inline-flex items-center px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 transition duration-150 cursor-pointer">
-                {t('nav.requestDemo') || 'Request Demo'}
-              </div>
-            </Link>
+            <div 
+              className="inline-flex items-center px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 transition duration-150 cursor-pointer"
+              onClick={() => setLocation('/request-demo')}
+            >
+              {t('nav.requestDemo') || 'Request Demo'}
+            </div>
             
-            <Link href="/buy-minutes">
-              <div className="inline-flex items-center px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 transition duration-150 cursor-pointer">
-                {t('nav.buyMinutes') || 'Buy Call Minutes'}
-              </div>
-            </Link>
+            <div 
+              className="inline-flex items-center px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 transition duration-150 cursor-pointer"
+              onClick={() => setLocation('/buy-minutes')}
+            >
+              {t('nav.buyMinutes') || 'Buy Call Minutes'}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -84,18 +88,20 @@ const Navbar = () => {
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <nav className="flex flex-col gap-4 pt-4">
                 {navLinks.map((link) => (
-                  <Link key={link.href} href={link.href}>
-                    <div 
-                      className="block px-3 py-2 text-neutral-600 hover:bg-primary-50 hover:text-primary rounded-md cursor-pointer"
-                      onClick={closeSheet}
-                    >
-                      {link.label || (link.href === '/features' ? 'Features' : 
-                        link.href === '/pricing' ? 'Pricing' : 
-                        link.href === '/solutions' ? 'Solutions' : 
-                        link.href === '/testimonials' ? 'Testimonials' : 
-                        link.href === '/blog' ? 'Blog' : 'Link')}
-                    </div>
-                  </Link>
+                  <div 
+                    key={link.href}
+                    className="block px-3 py-2 text-neutral-600 hover:bg-primary-50 hover:text-primary rounded-md cursor-pointer"
+                    onClick={() => {
+                      closeSheet();
+                      setLocation(link.href);
+                    }}
+                  >
+                    {link.label || (link.href === '/features' ? 'Features' : 
+                      link.href === '/pricing' ? 'Pricing' : 
+                      link.href === '/solutions' ? 'Solutions' : 
+                      link.href === '/testimonials' ? 'Testimonials' : 
+                      link.href === '/blog' ? 'Blog' : 'Link')}
+                  </div>
                 ))}
                 <div className="pt-4 flex flex-col space-y-3">
                   <div className="px-3">
@@ -104,22 +110,24 @@ const Navbar = () => {
                     </label>
                     <LanguageSelector mobile />
                   </div>
-                  <Link href="/request-demo">
-                    <div 
-                      className="mx-3 px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 text-center cursor-pointer"
-                      onClick={closeSheet}
-                    >
-                      {t('nav.requestDemo') || 'Request Demo'}
-                    </div>
-                  </Link>
-                  <Link href="/buy-minutes">
-                    <div 
-                      className="mx-3 px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 text-center cursor-pointer"
-                      onClick={closeSheet}
-                    >
-                      {t('nav.buyMinutes') || 'Buy Call Minutes'}
-                    </div>
-                  </Link>
+                  <div 
+                    className="mx-3 px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 text-center cursor-pointer"
+                    onClick={() => {
+                      closeSheet();
+                      setLocation('/request-demo');
+                    }}
+                  >
+                    {t('nav.requestDemo') || 'Request Demo'}
+                  </div>
+                  <div 
+                    className="mx-3 px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 text-center cursor-pointer"
+                    onClick={() => {
+                      closeSheet();
+                      setLocation('/buy-minutes');
+                    }}
+                  >
+                    {t('nav.buyMinutes') || 'Buy Call Minutes'}
+                  </div>
                 </div>
               </nav>
             </SheetContent>
