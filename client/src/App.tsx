@@ -13,6 +13,8 @@ import Blog from "@/pages/Blog";
 import Contact from "@/pages/Contact";
 import RequestDemo from "@/pages/RequestDemo";
 import BuyMinutes from "@/pages/BuyMinutes";
+import Checkout from "@/pages/checkout";
+import PaymentSuccess from "@/pages/payment-success";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/ui/ChatWidget";
@@ -30,6 +32,8 @@ function Router() {
       <Route path="/contact" component={Contact} />
       <Route path="/request-demo" component={RequestDemo} />
       <Route path="/buy-minutes" component={BuyMinutes} />
+      <Route path="/checkout" component={Checkout} />
+      <Route path="/payment-success" component={PaymentSuccess} />
       <Route component={NotFound} />
     </Switch>
   );

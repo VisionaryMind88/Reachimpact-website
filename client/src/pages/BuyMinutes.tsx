@@ -371,7 +371,15 @@ const BuyMinutes = () => {
                 <div className="text-center p-10 bg-neutral-50 rounded-lg">
                   <h3 className="text-2xl font-bold mb-4">{t('buyMinutes.subscriptionComingSoon.title')}</h3>
                   <p className="text-neutral-600 mb-6">{t('buyMinutes.subscriptionComingSoon.message')}</p>
-                  <Button variant="outline" onClick={() => document.querySelector('[data-value="payg"]')?.click()}>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      const element = document.querySelector('[data-value="payg"]');
+                      if (element && element instanceof HTMLElement) {
+                        element.click();
+                      }
+                    }}
+                  >
                     {t('buyMinutes.subscriptionComingSoon.cta')}
                   </Button>
                 </div>
