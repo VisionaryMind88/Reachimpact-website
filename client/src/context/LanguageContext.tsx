@@ -5,26 +5,17 @@ import {
   defaultLanguage, 
   supportedLanguages 
 } from '@/types';
-import en from '@/locales/en';
-import nl from '@/locales/nl';
-import de from '@/locales/de';
-import es from '@/locales/es';
-import fr from '@/locales/fr';
+import { 
+  getTranslations, 
+  getTranslationValue, 
+  detectBrowserLanguage
+} from '@/lib/i18n';
 
-// All locale data
-const locales = {
-  en,
-  nl,
-  de,
-  es,
-  fr
-};
-
-// Create the context
+// Create the context with a default value
 const LanguageContext = createContext<LanguageContextType>({
   language: defaultLanguage,
   setLanguage: () => {},
-  t: (key: string) => key,
+  t: (key: string) => undefined,
   languages: supportedLanguages
 });
 
@@ -42,16 +33,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     }
     
     // Otherwise detect browser language
-    try {
-      const browserLang = navigator.language.split('-')[0];
-      if (Object.keys(supportedLanguages).includes(browserLang)) {
-        return browserLang as SupportedLanguage;
-      }
-    } catch (error) {
-      console.warn('Error detecting browser language:', error);
-    }
-    
-    return defaultLanguage;
+    return detectBrowserLanguage();
   });
 
   // Function to change the language
@@ -64,60 +46,32 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     }
   };
 
-  // Translation function that handles nested paths with fallbacks
-  const t = (key: string): string => {
-    // Default empty response if key is invalid
+  // Translation function with robust fallback handling
+  const t = (key: string): string | undefined => {
+    // If key is empty or not a string, return empty string
     if (!key || typeof key !== 'string') {
       return '';
     }
     
-    try {
-      // Split the key into parts (e.g., "nav.features" -> ["nav", "features"])
-      const keyParts = key.split('.');
-      let translation;
-      
-      // Try to get translation from current language
-      let obj = locales[language];
-      for (const part of keyParts) {
-        if (!obj || typeof obj !== 'object') {
-          obj = undefined;
-          break;
-        }
-        obj = obj[part];
-      }
-      translation = obj;
-      
-      // If translation found, return it
-      if (translation !== undefined && translation !== null) {
-        return String(translation);
-      }
-      
-      // If not found, try with default language
-      if (language !== defaultLanguage) {
-        obj = locales[defaultLanguage];
-        for (const part of keyParts) {
-          if (!obj || typeof obj !== 'object') {
-            obj = undefined;
-            break;
-          }
-          obj = obj[part];
-        }
-        translation = obj;
-        
-        if (translation !== undefined && translation !== null) {
-          return String(translation);
-        }
-      }
-      
-      // If we're still here, translation wasn't found
-      console.warn(`No translation found for key: ${key}`);
-      
-      // Return the key itself as fallback
-      return key;
-    } catch (error) {
-      console.error(`Error retrieving translation for key "${key}":`, error);
-      return key;
+    // Try to get the translation for the current language
+    const value = getTranslationValue(language, key);
+    
+    // If found, return it
+    if (value !== undefined && value !== null) {
+      return String(value);
     }
+    
+    // If not found in current language, try default language as fallback
+    if (language !== defaultLanguage) {
+      const defaultValue = getTranslationValue(defaultLanguage, key);
+      if (defaultValue !== undefined && defaultValue !== null) {
+        return String(defaultValue);
+      }
+    }
+    
+    // Return undefined and let the components handle fallbacks with || operators
+    console.warn(`No translation found for key: ${key}`);
+    return undefined;
   };
 
   // Update document language attribute when language changes

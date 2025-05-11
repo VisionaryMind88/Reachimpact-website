@@ -41,22 +41,17 @@ function getNestedProperty(obj: any, path: string): any {
   if (!obj || typeof obj !== 'object') return undefined;
   if (!path) return obj;
   
-  try {
-    const parts = path.split('.');
-    let current = obj;
-    
-    for (const part of parts) {
-      if (current === null || current === undefined || typeof current !== 'object') {
-        return undefined;
-      }
-      current = current[part];
+  const parts = path.split('.');
+  let current = obj;
+  
+  for (const part of parts) {
+    if (current === null || current === undefined || typeof current !== 'object') {
+      return undefined;
     }
-    
-    return current;
-  } catch (error) {
-    console.error(`Error accessing nested property ${path}:`, error);
-    return undefined;
+    current = current[part];
   }
+  
+  return current;
 }
 
 // Function to get a specific translation value using a dot-notation path
