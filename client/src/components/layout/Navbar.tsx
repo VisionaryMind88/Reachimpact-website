@@ -31,23 +31,27 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/">
-            <a className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 cursor-pointer">
               <div className="text-primary text-3xl">
                 <i className="fas fa-robot"></i>
               </div>
               <span className="font-accent font-bold text-xl md:text-2xl text-neutral-800">
                 Reach<span className="text-primary">Impact</span>
               </span>
-            </a>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
-                <a className="text-neutral-600 hover:text-primary font-medium transition duration-150">
-                  {link.label}
-                </a>
+                <div className="text-neutral-600 hover:text-primary font-medium transition duration-150 cursor-pointer">
+                  {link.label || (link.href === '/features' ? 'Features' : 
+                    link.href === '/pricing' ? 'Pricing' : 
+                    link.href === '/solutions' ? 'Solutions' : 
+                    link.href === '/testimonials' ? 'Testimonials' : 
+                    link.href === '/blog' ? 'Blog' : 'Link')}
+                </div>
               </Link>
             ))}
           </div>
@@ -57,15 +61,15 @@ const Navbar = () => {
             <LanguageSelector />
             
             <Link href="/request-demo">
-              <a className="inline-flex items-center px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 transition duration-150">
-                {t('nav.requestDemo')}
-              </a>
+              <div className="inline-flex items-center px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 transition duration-150 cursor-pointer">
+                {t('nav.requestDemo') || 'Request Demo'}
+              </div>
             </Link>
             
             <Link href="/buy-minutes">
-              <a className="inline-flex items-center px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 transition duration-150">
-                {t('nav.buyMinutes')}
-              </a>
+              <div className="inline-flex items-center px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 transition duration-150 cursor-pointer">
+                {t('nav.buyMinutes') || 'Buy Call Minutes'}
+              </div>
             </Link>
           </div>
 
@@ -80,36 +84,40 @@ const Navbar = () => {
               <nav className="flex flex-col gap-4 pt-4">
                 {navLinks.map((link) => (
                   <Link key={link.href} href={link.href}>
-                    <a 
-                      className="block px-3 py-2 text-neutral-600 hover:bg-primary-50 hover:text-primary rounded-md"
+                    <div 
+                      className="block px-3 py-2 text-neutral-600 hover:bg-primary-50 hover:text-primary rounded-md cursor-pointer"
                       onClick={closeSheet}
                     >
-                      {link.label}
-                    </a>
+                      {link.label || (link.href === '/features' ? 'Features' : 
+                        link.href === '/pricing' ? 'Pricing' : 
+                        link.href === '/solutions' ? 'Solutions' : 
+                        link.href === '/testimonials' ? 'Testimonials' : 
+                        link.href === '/blog' ? 'Blog' : 'Link')}
+                    </div>
                   </Link>
                 ))}
                 <div className="pt-4 flex flex-col space-y-3">
                   <div className="px-3">
                     <label htmlFor="language-select" className="block text-sm font-medium text-neutral-700 mb-1">
-                      {t('nav.language')}
+                      {t('nav.language') || 'Language'}
                     </label>
                     <LanguageSelector mobile />
                   </div>
                   <Link href="/request-demo">
-                    <a 
-                      className="mx-3 px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 text-center"
+                    <div 
+                      className="mx-3 px-4 py-2 border border-primary text-primary font-medium rounded-md hover:bg-primary-50 text-center cursor-pointer"
                       onClick={closeSheet}
                     >
-                      {t('nav.requestDemo')}
-                    </a>
+                      {t('nav.requestDemo') || 'Request Demo'}
+                    </div>
                   </Link>
                   <Link href="/buy-minutes">
-                    <a 
-                      className="mx-3 px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 text-center"
+                    <div 
+                      className="mx-3 px-4 py-2 bg-primary text-white font-medium rounded-md hover:bg-primary/90 text-center cursor-pointer"
                       onClick={closeSheet}
                     >
-                      {t('nav.buyMinutes')}
-                    </a>
+                      {t('nav.buyMinutes') || 'Buy Call Minutes'}
+                    </div>
                   </Link>
                 </div>
               </nav>

@@ -24,9 +24,9 @@ const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
       <p className="text-neutral-600 mb-4">{description}</p>
       <div className="flex items-center mt-auto">
         <Link href="/features">
-          <a className="text-primary hover:text-primary/80 font-medium flex items-center">
+          <div className="text-primary hover:text-primary/80 font-medium flex items-center cursor-pointer">
             Learn more <i className="fas fa-arrow-right ml-2 text-sm"></i>
-          </a>
+          </div>
         </Link>
       </div>
     </motion.div>
