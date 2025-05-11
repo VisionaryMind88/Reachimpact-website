@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { useLanguage } from '@/context/LanguageContext';
 import { motion } from 'framer-motion';
+import { FaPlay } from 'react-icons/fa';
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -57,7 +58,7 @@ const HeroSection = () => {
               />
               <div className="absolute inset-0 flex items-center justify-center">
                 <button className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center shadow-lg hover:bg-white transition duration-300">
-                  <i className="fas fa-play text-primary text-2xl"></i>
+                  <FaPlay className="text-primary text-2xl" />
                 </button>
               </div>
             </div>
