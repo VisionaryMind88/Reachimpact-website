@@ -68,7 +68,16 @@ const BuyMinutes = () => {
     if (metaDescription) {
       metaDescription.setAttribute('content', 'Purchase AI calling minutes for your outbound campaigns. Choose from flexible pricing plans with no long-term commitments required.');
     }
-  }, []);
+    
+    // Check for plan in URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const planParam = params.get('plan');
+    
+    if (planParam && ['starter', 'professional', 'enterprise'].includes(planParam)) {
+      setSelectedPlan(planParam);
+      form.setValue('plan', planParam);
+    }
+  }, [form]);
 
   const formSchema = z.object({
     firstName: z.string().min(1, t('buyMinutes.validation.firstName')),

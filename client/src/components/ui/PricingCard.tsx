@@ -17,6 +17,7 @@ type PricingCardProps = {
   features: PricingFeature[];
   cta: string;
   popular?: boolean;
+  planId?: string;
 }
 
 const PricingCard = ({
@@ -28,7 +29,8 @@ const PricingCard = ({
   totalUnits,
   features,
   cta,
-  popular = false
+  popular = false,
+  planId
 }: PricingCardProps) => {
   return (
     <div 
@@ -69,7 +71,7 @@ const PricingCard = ({
       </div>
 
       <div className="px-8 pb-8">
-        <Link href="/buy-minutes">
+        <Link href={cta === "Subscribe" ? `/subscribe?plan=${planId}` : "/buy-minutes"}>
           <Button 
             className={cn(
               "w-full",

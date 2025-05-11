@@ -95,28 +95,97 @@ const PricingSection = () => {
         </div>
 
         {/* Pricing Cards */}
-        <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          {pricingPlans.map((plan, index) => (
-            <PricingCard
-              key={index}
-              name={plan.name}
-              description={plan.description}
-              price={plan.price}
-              unit={plan.unit}
-              totalPrice={plan.totalPrice}
-              totalUnits={plan.totalUnits}
-              features={plan.features}
-              cta={plan.cta}
-              popular={plan.popular}
-            />
-          ))}
-        </motion.div>
+        {pricingType === 'payg' ? (
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            {pricingPlans.map((plan, index) => {
+              const planId = index === 0 ? 'starter' : 
+                            index === 1 ? 'professional' : 'enterprise';
+              return (
+                <PricingCard
+                  key={index}
+                  name={plan.name}
+                  description={plan.description}
+                  price={plan.price}
+                  unit={plan.unit}
+                  totalPrice={plan.totalPrice}
+                  totalUnits={plan.totalUnits}
+                  features={plan.features}
+                  cta="Buy Minutes"
+                  popular={plan.popular}
+                  planId={planId}
+                />
+              );
+            })}
+          </motion.div>
+        ) : (
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            {pricingPlans.map((plan, index) => {
+              const planId = index === 0 ? 'starter-monthly' : 
+                            index === 1 ? 'professional-monthly' : 'enterprise-monthly';
+              return (
+                <div key={index} className="flex flex-col h-full bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden hover:shadow-md transition-shadow">
+                  {plan.popular && (
+                    <div className="bg-primary text-white text-center py-2 text-sm font-medium">
+                      Most Popular
+                    </div>
+                  )}
+                  
+                  <div className="p-6 flex-grow">
+                    <h3 className="text-xl font-bold">{plan.name}</h3>
+                    <p className="text-neutral-600 mb-4">{plan.description}</p>
+                    
+                    <div className="mb-4">
+                      <span className="text-3xl font-bold">${index === 0 ? '99' : index === 1 ? '299' : '799'}</span>
+                      <span className="text-neutral-600">/month</span>
+                    </div>
+                    
+                    <p className="text-sm text-neutral-600 mb-6">
+                      {index === 0 ? '800' : index === 1 ? '3,000' : '10,000'} minutes per month
+                      <span className="block mt-1">
+                        (${index === 0 ? '0.124' : index === 1 ? '0.100' : '0.080'} per minute)
+                      </span>
+                    </p>
+                    
+                    <ul className="space-y-3 mb-6">
+                      {plan.features.map((feature, fIndex) => (
+                        <li key={fIndex} className="flex items-start">
+                          <span className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mr-2 ${
+                            feature.included ? 'text-green-500' : 'text-neutral-300'
+                          }`}>
+                            <i className={feature.included ? 'fas fa-check' : 'fas fa-times'}></i>
+                          </span>
+                          <span className={feature.included ? 'text-neutral-800' : 'text-neutral-400'}>
+                            {feature.name}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div className="p-6 bg-neutral-50 border-t border-neutral-200">
+                    <Link href={`/subscribe?plan=${planId}`}>
+                      <Button className="w-full" variant={plan.popular ? 'default' : 'outline'}>
+                        Subscribe
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </motion.div>
+        )}
 
         <div className="mt-12 text-center">
           <p className="text-neutral-600 mb-4">{t('pricing.custom')}</p>
