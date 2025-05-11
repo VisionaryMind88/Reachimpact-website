@@ -8,6 +8,7 @@ import { apiRequest } from '@/lib/queryClient';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { motion } from 'framer-motion';
+import { FaCheck, FaCreditCard } from 'react-icons/fa';
 import {
   Form,
   FormControl,
@@ -61,24 +62,6 @@ const BuyMinutes = () => {
     }
   };
 
-  // Set page title and meta description for SEO
-  useEffect(() => {
-    document.title = 'Buy Call Minutes | ReachImpact';
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Purchase AI calling minutes for your outbound campaigns. Choose from flexible pricing plans with no long-term commitments required.');
-    }
-    
-    // Check for plan in URL parameters
-    const params = new URLSearchParams(window.location.search);
-    const planParam = params.get('plan');
-    
-    if (planParam && ['starter', 'professional', 'enterprise'].includes(planParam)) {
-      setSelectedPlan(planParam);
-      form.setValue('plan', planParam);
-    }
-  }, [form]);
-
   const formSchema = z.object({
     firstName: z.string().min(1, t('buyMinutes.validation.firstName')),
     lastName: z.string().min(1, t('buyMinutes.validation.lastName')),
@@ -97,6 +80,24 @@ const BuyMinutes = () => {
       plan: 'professional'
     }
   });
+
+  // Set page title and meta description for SEO
+  useEffect(() => {
+    document.title = 'Buy Call Minutes | ReachImpact';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Purchase AI calling minutes for your outbound campaigns. Choose from flexible pricing plans with no long-term commitments required.');
+    }
+    
+    // Check for plan in URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const planParam = params.get('plan');
+    
+    if (planParam && ['starter', 'professional', 'enterprise'].includes(planParam)) {
+      setSelectedPlan(planParam);
+      form.setValue('plan', planParam);
+    }
+  }, [form]);
 
   // When the plan changes in the form
   useEffect(() => {
@@ -217,25 +218,25 @@ const BuyMinutes = () => {
                       <ul className="space-y-2">
                         <li className="flex items-start">
                           <div className="flex-shrink-0 text-primary mr-2">
-                            <i className="fas fa-check"></i>
+                            <FaCheck className="mt-1" />
                           </div>
                           <span className="text-neutral-700">{t('buyMinutes.feature1')}</span>
                         </li>
                         <li className="flex items-start">
                           <div className="flex-shrink-0 text-primary mr-2">
-                            <i className="fas fa-check"></i>
+                            <FaCheck className="mt-1" />
                           </div>
                           <span className="text-neutral-700">{t('buyMinutes.feature2')}</span>
                         </li>
                         <li className="flex items-start">
                           <div className="flex-shrink-0 text-primary mr-2">
-                            <i className="fas fa-check"></i>
+                            <FaCheck className="mt-1" />
                           </div>
                           <span className="text-neutral-700">{t('buyMinutes.feature3')}</span>
                         </li>
                         <li className="flex items-start">
                           <div className="flex-shrink-0 text-primary mr-2">
-                            <i className="fas fa-check"></i>
+                            <FaCheck className="mt-1" />
                           </div>
                           <span className="text-neutral-700">{t('buyMinutes.feature4')}</span>
                         </li>
@@ -342,7 +343,7 @@ const BuyMinutes = () => {
                           <h3 className="font-medium">{t('buyMinutes.paymentInfo')}</h3>
                           <div className="p-4 bg-neutral-50 rounded border border-neutral-200">
                             <div className="text-center py-4">
-                              <i className="far fa-credit-card text-2xl text-neutral-400 mb-2"></i>
+                              <FaCreditCard className="text-2xl text-neutral-400 mb-2 mx-auto" />
                               <p className="text-neutral-600">{t('buyMinutes.cardDetailsPlaceholder')}</p>
                             </div>
                           </div>
@@ -365,10 +366,6 @@ const BuyMinutes = () => {
                           >
                             {isLoading ? t('buyMinutes.processing') : t('buyMinutes.completeOrder')}
                           </Button>
-                          
-                          <p className="text-xs text-neutral-500 text-center mt-4">
-                            {t('buyMinutes.secureCheckout')}
-                          </p>
                         </div>
                       </form>
                     </Form>
@@ -377,55 +374,27 @@ const BuyMinutes = () => {
               </TabsContent>
               
               <TabsContent value="subscription">
-                <div className="text-center p-10 bg-neutral-50 rounded-lg">
-                  <h3 className="text-2xl font-bold mb-4">{t('buyMinutes.subscriptionComingSoon.title')}</h3>
-                  <p className="text-neutral-600 mb-6">{t('buyMinutes.subscriptionComingSoon.message')}</p>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => {
-                      const element = document.querySelector('[data-value="payg"]');
-                      if (element && element instanceof HTMLElement) {
-                        element.click();
-                      }
-                    }}
-                  >
-                    {t('buyMinutes.subscriptionComingSoon.cta')}
-                  </Button>
+                <div className="text-center p-12 bg-neutral-50 rounded-lg">
+                  <h3 className="text-2xl font-bold mb-4">{t('buyMinutes.subscriptionTitle')}</h3>
+                  <p className="text-neutral-600 mb-6 max-w-2xl mx-auto">
+                    {t('buyMinutes.subscriptionDesc')}
+                  </p>
+                  <a href="/subscribe">
+                    <Button variant="default" size="lg">
+                      {t('buyMinutes.viewSubscriptionPlans')}
+                    </Button>
+                  </a>
                 </div>
               </TabsContent>
             </Tabs>
-            
-            {/* Additional Information */}
-            <div className="mt-20 grid md:grid-cols-3 gap-8">
-              <div className="text-center p-6">
-                <div className="w-16 h-16 rounded-full bg-neutral-100 mx-auto flex items-center justify-center mb-4 text-2xl text-neutral-700">
-                  <i className="fas fa-shield-alt"></i>
-                </div>
-                <h3 className="text-xl font-bold mb-3">{t('buyMinutes.securityTitle')}</h3>
-                <p className="text-neutral-600">{t('buyMinutes.securityText')}</p>
-              </div>
-              
-              <div className="text-center p-6">
-                <div className="w-16 h-16 rounded-full bg-neutral-100 mx-auto flex items-center justify-center mb-4 text-2xl text-neutral-700">
-                  <i className="fas fa-sync-alt"></i>
-                </div>
-                <h3 className="text-xl font-bold mb-3">{t('buyMinutes.refundTitle')}</h3>
-                <p className="text-neutral-600">{t('buyMinutes.refundText')}</p>
-              </div>
-              
-              <div className="text-center p-6">
-                <div className="w-16 h-16 rounded-full bg-neutral-100 mx-auto flex items-center justify-center mb-4 text-2xl text-neutral-700">
-                  <i className="fas fa-headset"></i>
-                </div>
-                <h3 className="text-xl font-bold mb-3">{t('buyMinutes.supportTitle')}</h3>
-                <p className="text-neutral-600">{t('buyMinutes.supportText')}</p>
-              </div>
-            </div>
+          </div>
+          
+          {/* FAQ Section */}
+          <div className="mt-24">
+            <FAQSection />
           </div>
         </div>
       </section>
-
-      <FAQSection />
     </>
   );
 };

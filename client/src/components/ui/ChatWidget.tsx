@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { FaRobot, FaUser, FaPaperPlane, FaComment, FaTimes } from 'react-icons/fa';
 
 type Message = {
   id: number;
@@ -72,7 +73,7 @@ const ChatWidget = () => {
             <div className="bg-primary text-white px-4 py-4 flex justify-between items-center">
               <div className="flex items-center">
                 <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-3">
-                  <i className="fas fa-robot"></i>
+                  <FaRobot />
                 </div>
                 <div>
                   <h3 className="font-medium">{t('chat.title')}</h3>
@@ -98,7 +99,7 @@ const ChatWidget = () => {
                   {message.sender === 'bot' && (
                     <div className="flex-shrink-0 mr-3">
                       <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center text-primary">
-                        <i className="fas fa-robot text-sm"></i>
+                        <FaRobot className="text-sm" />
                       </div>
                     </div>
                   )}
@@ -114,7 +115,7 @@ const ChatWidget = () => {
                   {message.sender === 'user' && (
                     <div className="flex-shrink-0 ml-3">
                       <div className="w-8 h-8 rounded-full bg-neutral-300 flex items-center justify-center text-neutral-600">
-                        <i className="fas fa-user text-sm"></i>
+                        <FaUser className="text-sm" />
                       </div>
                     </div>
                   )}
