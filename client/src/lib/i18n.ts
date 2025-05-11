@@ -28,12 +28,24 @@ export const getTranslations = (language: LocaleKey = defaultLanguage) => {
 
 // Function to get a specific translation value using a dot-notation path
 export const getTranslationValue = (language: LocaleKey, path: string) => {
-  const translations = getTranslations(language);
-  const keys = path.split('.');
-  
-  return keys.reduce((obj, key) => {
-    return obj && (obj as any)[key] !== undefined ? (obj as any)[key] : undefined;
-  }, translations);
+  try {
+    const translations = getTranslations(language);
+    const keys = path.split('.');
+    
+    const result = keys.reduce((obj, key) => {
+      return obj && typeof obj === 'object' && key in obj ? (obj as any)[key] : undefined;
+    }, translations);
+    
+    // For debugging
+    if (result === undefined) {
+      console.warn(`Translation key "${path}" not found in ${language} locale`);
+    }
+    
+    return result;
+  } catch (error) {
+    console.error(`Error retrieving translation for key "${path}"`, error);
+    return undefined;
+  }
 };
 
 // Function to detect the user's browser language

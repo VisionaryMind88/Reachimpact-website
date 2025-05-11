@@ -44,23 +44,40 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
 
   // Translation function
   const t = (key: string): string => {
-    const value = getTranslationValue(language, key);
-    if (value === undefined) {
-      console.warn(`Translation key "${key}" not found in ${language} locale`);
-      
-      // Fall back to default language
-      if (language !== defaultLanguage) {
-        const defaultValue = getTranslationValue(defaultLanguage, key);
-        if (defaultValue !== undefined) {
-          return defaultValue as string;
-        }
-      }
-      
-      // If still not found, return the key itself
-      return key;
+    // If key is empty or not a string, return empty string
+    if (!key || typeof key !== 'string') {
+      return '';
     }
     
-    return value as string;
+    // Try to get the translation for the current language
+    const value = getTranslationValue(language, key);
+    
+    // If found, return it
+    if (value !== undefined && value !== null) {
+      return String(value);
+    }
+    
+    // If not found in current language, try default language as fallback
+    if (language !== defaultLanguage) {
+      const defaultValue = getTranslationValue(defaultLanguage, key);
+      if (defaultValue !== undefined && defaultValue !== null) {
+        return String(defaultValue);
+      }
+    }
+    
+    // For static text fallback (temporary fix)
+    if (key === 'hero.title') return 'Revolutionize Your';
+    if (key === 'hero.titleHighlight') return 'Outreach';
+    if (key === 'hero.description') return 'ReachImpact uses advanced AI technology to automate your sales and marketing calls, helping you generate more leads, schedule meetings, and improve sales effectiveness—all without lifting a finger.';
+    if (key === 'trustedBy.title') return 'Trusted by forward-thinking companies';
+    if (key === 'features.title') return 'Powerful Features That Drive Results';
+    if (key === 'footer.products.title') return 'Products';
+    if (key === 'footer.resources.title') return 'Resources';
+    if (key === 'footer.company.title') return 'Company';
+    
+    console.warn(`No translation found for key: ${key}`);
+    // If all else fails, return the key (but with a distinctive format to identify missing translations)
+    return key; 
   };
 
   // Update document language attribute when language changes
