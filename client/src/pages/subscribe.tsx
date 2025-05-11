@@ -402,9 +402,9 @@ export default function Subscribe() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl font-bold mb-4">{t('subscription.title') || "Subscribe to ReachImpact"}</h1>
+            <h1 className="text-4xl font-bold mb-4">Subscribe to ReachImpact</h1>
             <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
-              {t('subscription.subtitle') || "Choose a plan that works for your business and start making AI-powered calls today."}
+              Choose a plan that works for your business and start making AI-powered calls today.
             </p>
           </motion.div>
         </div>
@@ -419,13 +419,13 @@ export default function Subscribe() {
           </div>
           <div className="flex justify-between max-w-sm mx-auto text-sm mt-2">
             <span className={step === 'select' ? 'text-primary font-medium' : ''}>
-              {t('subscription.step1') || "Select Plan"}
+              Select Plan
             </span>
             <span className={step === 'details' ? 'text-primary font-medium' : ''}>
-              {t('subscription.step2') || "Your Details"}
+              Your Details
             </span>
             <span className={step === 'payment' ? 'text-primary font-medium' : ''}>
-              {t('subscription.step3') || "Payment"}
+              Payment
             </span>
           </div>
         </div>

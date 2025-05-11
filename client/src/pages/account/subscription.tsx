@@ -289,8 +289,8 @@ export default function SubscriptionManagement() {
               <CardTitle>{t('subscriptionManagement.currentPlan') || "Current Plan"}</CardTitle>
               <CardDescription>
                 {subscription.cancelAtPeriodEnd 
-                  ? t('subscriptionManagement.canceledNotice', { date: new Date(subscription.currentPeriodEnd).toLocaleDateString() }) || `Your subscription will be canceled on ${new Date(subscription.currentPeriodEnd).toLocaleDateString()}`
-                  : t('subscriptionManagement.activeNotice') || "Your subscription is currently active"}
+                  ? `Your subscription will be canceled on ${new Date(subscription.currentPeriodEnd).toLocaleDateString()}`
+                  : "Your subscription is currently active"}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -347,9 +347,7 @@ export default function SubscriptionManagement() {
                   className="h-2" 
                 />
                 <p className="text-xs text-neutral-500 mt-2">
-                  {t('subscriptionManagement.usageRemaining', { 
-                    count: (subscription.minutesTotal - subscription.minutesUsed).toLocaleString() 
-                  }) || `${(subscription.minutesTotal - subscription.minutesUsed).toLocaleString()} minutes remaining`}
+                  {`${(subscription.minutesTotal - subscription.minutesUsed).toLocaleString()} minutes remaining`}
                 </p>
               </div>
             </CardContent>
