@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { useLanguage } from '@/context/LanguageContext';
 import { motion } from 'framer-motion';
+import { FaPlay } from 'react-icons/fa';
 
 const HeroSection = () => {
   const { t } = useLanguage();
@@ -23,20 +24,20 @@ const HeroSection = () => {
           >
             <div className="text-center lg:text-left">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 font-accent">
-                {t('hero.title')} <span className="text-secondary-300">{t('hero.titleHighlight')}</span>
+                {t('hero.title') || 'Revolutionize Your'} <span className="text-secondary-300">{t('hero.titleHighlight') || 'Outreach'}</span>
               </h1>
               <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto lg:mx-0">
-                {t('hero.description')}
+                {t('hero.description') || 'ReachImpact uses advanced AI technology to automate your sales and marketing calls, helping you generate more leads, schedule meetings, and improve sales effectiveness—all without lifting a finger.'}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
                 <Link href="/request-demo">
                   <Button size="lg" variant="default" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto">
-                    {t('hero.requestDemo')}
+                    {t('hero.requestDemo') || 'Request Demo'}
                   </Button>
                 </Link>
                 <Link href="/buy-minutes">
                   <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                    {t('hero.buyMinutes')}
+                    {t('hero.buyMinutes') || 'Buy Call Minutes'}
                   </Button>
                 </Link>
               </div>
@@ -57,7 +58,7 @@ const HeroSection = () => {
               />
               <div className="absolute inset-0 flex items-center justify-center">
                 <button className="w-20 h-20 bg-white/90 rounded-full flex items-center justify-center shadow-lg hover:bg-white transition duration-300">
-                  <i className="fas fa-play text-primary text-2xl"></i>
+                  <FaPlay className="text-primary text-2xl" />
                 </button>
               </div>
             </div>

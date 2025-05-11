@@ -54,8 +54,8 @@ const FeaturesSection = () => {
     <section id="features" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-accent">{t('features.title')}</h2>
-          <p className="text-lg text-neutral-600 max-w-3xl mx-auto">{t('features.subtitle')}</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-accent">{t('features.title') || 'Powerful Features That Drive Results'}</h2>
+          <p className="text-lg text-neutral-600 max-w-3xl mx-auto">{t('features.subtitle') || 'Our AI-powered platform offers everything you need to automate and enhance your outbound calling strategy.'}</p>
         </div>
 
         <motion.div 

@@ -32,9 +32,58 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = this.currentId++;
-    const user: User = { ...insertUser, id };
+    const now = new Date();
+    const user: User = { 
+      ...insertUser, 
+      id,
+      createdAt: now,
+      updatedAt: now,
+      stripeCustomerId: null,
+      stripeSubscriptionId: null,
+      firstName: insertUser.firstName || null,
+      lastName: insertUser.lastName || null,
+      company: insertUser.company || null,
+      phone: insertUser.phone || null
+    };
     this.users.set(id, user);
     return user;
+  }
+
+  async updateStripeCustomerId(userId: number, customerId: string): Promise<User> {
+    const user = await this.getUser(userId);
+    
+    if (!user) {
+      throw new Error(`User with ID ${userId} not found`);
+    }
+    
+    const updatedUser: User = {
+      ...user,
+      stripeCustomerId: customerId,
+      updatedAt: new Date()
+    };
+    
+    this.users.set(userId, updatedUser);
+    
+    return updatedUser;
+  }
+
+  async updateUserStripeInfo(userId: number, stripeInfo: { stripeCustomerId: string, stripeSubscriptionId: string }): Promise<User> {
+    const user = await this.getUser(userId);
+    
+    if (!user) {
+      throw new Error(`User with ID ${userId} not found`);
+    }
+    
+    const updatedUser: User = {
+      ...user,
+      stripeCustomerId: stripeInfo.stripeCustomerId,
+      stripeSubscriptionId: stripeInfo.stripeSubscriptionId,
+      updatedAt: new Date()
+    };
+    
+    this.users.set(userId, updatedUser);
+    
+    return updatedUser;
   }
 }
 

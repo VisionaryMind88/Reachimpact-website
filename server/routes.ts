@@ -95,15 +95,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Stripe payment route for purchasing call minutes
   app.post("/api/create-payment-intent", async (req, res) => {
     try {
-      const { amount, firstName, lastName, email, company, plan } = req.body;
+      const { amount, firstName, lastName, email, company, plan, minutes } = req.body;
       
       // Validate required fields
       if (!amount || !email) {
         return res.status(400).json({ message: "Missing required fields" });
       }
       
-      // In a real implementation with Stripe, you would create a payment intent
-      // For demo purposes, we'll simulate this
+      // Create a real payment intent with Stripe
       const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(amount * 100), // Convert to cents
         currency: "usd",
@@ -112,7 +111,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           lastName,
           email,
           company,
-          plan
+          plan,
+          minutes: String(minutes),
+          type: 'one-time'
         }
       });
       
@@ -123,6 +124,119 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error("Error creating payment intent:", error);
       return res.status(500).json({ message: `Error creating payment: ${error.message}` });
+    }
+  });
+  
+  // Stripe subscription route for recurring call minute plans
+  app.post("/api/get-or-create-subscription", async (req, res) => {
+    try {
+      const { email, firstName, lastName, company, planId, customerId } = req.body;
+      
+      // Validate required fields
+      if (!email || !planId) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+      
+      let customer;
+      
+      // If customer already exists, retrieve it
+      if (customerId) {
+        try {
+          customer = await stripe.customers.retrieve(customerId);
+          if ((customer as any).deleted) {
+            // If customer was deleted, create a new one
+            customer = null;
+          }
+        } catch (error) {
+          console.log('Customer not found or error retrieving customer:', error);
+          customer = null;
+        }
+      }
+      
+      // If customer doesn't exist, create one
+      if (!customer) {
+        customer = await stripe.customers.create({
+          email,
+          name: `${firstName || ''} ${lastName || ''}`.trim(),
+          metadata: {
+            company
+          }
+        });
+      }
+      
+      // Create a new subscription
+      const subscription = await stripe.subscriptions.create({
+        customer: customer.id,
+        items: [{
+          price: planId, // price ID from Stripe dashboard
+        }],
+        payment_behavior: 'default_incomplete',
+        payment_settings: { 
+          save_default_payment_method: 'on_subscription' 
+        },
+        expand: ['latest_invoice.payment_intent'],
+      });
+      
+      // Return client secret for the payment intent
+      return res.status(200).json({
+        subscriptionId: subscription.id,
+        clientSecret: (subscription.latest_invoice as any)?.payment_intent?.client_secret,
+        customerId: customer.id
+      });
+    } catch (error: any) {
+      console.error("Error creating subscription:", error);
+      return res.status(500).json({ message: `Error creating subscription: ${error.message}` });
+    }
+  });
+  
+  // Webhook handler for Stripe events (subscription status updates, etc)
+  app.post('/api/webhook', async (req, res) => {
+    const signature = req.headers['stripe-signature'] as string;
+    
+    if (!signature) {
+      return res.status(400).json({ message: 'Missing signature header' });
+    }
+    
+    let event;
+    
+    try {
+      const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+      
+      if (endpointSecret) {
+        // Verify the event with the webhook secret
+        event = stripe.webhooks.constructEvent(
+          req.body,
+          signature,
+          endpointSecret
+        );
+      } else {
+        // If no webhook secret is configured, just parse the event
+        event = JSON.parse(req.body);
+      }
+      
+      // Handle the event
+      switch (event.type) {
+        case 'invoice.payment_succeeded':
+          const invoice = event.data.object;
+          // Handle successful subscription payment
+          console.log('Payment succeeded for invoice:', invoice.id);
+          break;
+          
+        case 'customer.subscription.updated':
+        case 'customer.subscription.deleted':
+          const subscription = event.data.object;
+          console.log(`Subscription ${event.type}:`, subscription.id);
+          // Update subscription status in your database
+          break;
+          
+        default:
+          console.log(`Unhandled event type: ${event.type}`);
+      }
+      
+      res.status(200).json({ received: true });
+    } catch (error: any) {
+      console.error('Webhook error:', error.message);
+      return res.status(400).json({ message: `Webhook error: ${error.message}` });
     }
   });
 
