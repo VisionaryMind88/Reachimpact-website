@@ -15,6 +15,9 @@ import RequestDemo from "@/pages/RequestDemo";
 import BuyMinutes from "@/pages/BuyMinutes";
 import Checkout from "@/pages/checkout";
 import PaymentSuccess from "@/pages/payment-success";
+import Subscribe from "@/pages/subscribe";
+import SubscriptionSuccess from "@/pages/subscription-success";
+import SubscriptionManagement from "@/pages/account/subscription";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/ui/ChatWidget";
@@ -34,6 +37,9 @@ function Router() {
       <Route path="/buy-minutes" component={BuyMinutes} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/payment-success" component={PaymentSuccess} />
+      <Route path="/subscribe" component={Subscribe} />
+      <Route path="/subscription-success" component={SubscriptionSuccess} />
+      <Route path="/account/subscription" component={SubscriptionManagement} />
       <Route component={NotFound} />
     </Switch>
   );
