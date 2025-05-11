@@ -8,15 +8,14 @@ import {
 import { 
   getTranslations, 
   getTranslationValue, 
-  detectBrowserLanguage,
-  fallbackTranslations 
+  detectBrowserLanguage
 } from '@/lib/i18n';
 
 // Create the context with a default value
 const LanguageContext = createContext<LanguageContextType>({
   language: defaultLanguage,
   setLanguage: () => {},
-  t: (key: string) => key,
+  t: (key: string) => undefined,
   languages: supportedLanguages
 });
 
@@ -48,7 +47,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   };
 
   // Translation function with robust fallback handling
-  const t = (key: string): string => {
+  const t = (key: string): string | undefined => {
     // If key is empty or not a string, return empty string
     if (!key || typeof key !== 'string') {
       return '';
@@ -70,14 +69,9 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       }
     }
     
-    // If still not found, use our hardcoded fallback translations
-    if (fallbackTranslations[key] !== undefined) {
-      return fallbackTranslations[key];
-    }
-    
-    // For debugging - display missing keys in a recognizable format
+    // Return undefined and let the components handle fallbacks with || operators
     console.warn(`No translation found for key: ${key}`);
-    return `[${key}]`;
+    return undefined;
   };
 
   // Update document language attribute when language changes

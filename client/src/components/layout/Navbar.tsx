@@ -17,11 +17,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { href: '/features', label: t('nav.features') },
-    { href: '/pricing', label: t('nav.pricing') },
-    { href: '/solutions', label: t('nav.solutions') },
-    { href: '/testimonials', label: t('nav.testimonials') },
-    { href: '/blog', label: t('nav.blog') }
+    { href: '/features', label: t('nav.features') || 'Features' },
+    { href: '/pricing', label: t('nav.pricing') || 'Pricing' },
+    { href: '/solutions', label: t('nav.solutions') || 'Solutions' },
+    { href: '/testimonials', label: t('nav.testimonials') || 'Testimonials' },
+    { href: '/blog', label: t('nav.blog') || 'Blog' }
   ];
 
   const closeSheet = () => setIsOpen(false);

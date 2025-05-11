@@ -31,7 +31,7 @@ export type SupportedLanguage = keyof typeof supportedLanguages;
 export interface LanguageContextType {
   language: SupportedLanguage;
   setLanguage: (lang: SupportedLanguage) => void;
-  t: (key: string) => string;
+  t: (key: string) => string | undefined;
   languages: typeof supportedLanguages;
 }
 
