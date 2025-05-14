@@ -1,0 +1,111 @@
+2025-05-13 20:00:02,163 - semgrep.notifications - WARNING - METRICS: Using configs from the Registry (like --config=p/ci) reports pseudonymous rule metrics to semgrep.dev.
+To disable Registry rule metrics, use "--metrics=off".
+Using configs only from local files (like --config=xyz.yml) does not enable metrics.
+
+More information: https://semgrep.dev/docs/metrics
+
+2025-05-13 20:00:02,164 - semgrep.run_scan - DEBUG - semgrep version 1.2.0
+2025-05-13 20:00:02,169 - semgrep.config_resolver - DEBUG - Loading local config from /home/runner/workspace/.config/.semgrep/semgrep_rules.json
+2025-05-13 20:00:02,172 - semgrep.config_resolver - DEBUG - Done loading local config from /home/runner/workspace/.config/.semgrep/semgrep_rules.json
+2025-05-13 20:00:02,177 - semgrep.config_resolver - DEBUG - Saving rules to /tmp/semgrep-8s19ij8e.rules
+2025-05-13 20:00:02,470 - semgrep.semgrep_core - DEBUG - Failed to open resource semgrep-core-proprietary: [Errno 2] No such file or directory: '/tmp/_MEIja5iVe/semgrep/bin/semgrep-core-proprietary'.
+2025-05-13 20:00:03,296 - semgrep.rule_lang - DEBUG - semgrep-core validation response: valid=True
+2025-05-13 20:00:03,296 - semgrep.rule_lang - DEBUG - semgrep-core validation succeeded
+2025-05-13 20:00:03,296 - semgrep.rule_lang - DEBUG - RPC validation succeeded
+2025-05-13 20:00:03,296 - semgrep.config_resolver - DEBUG - loaded 1 configs in 1.1277682781219482
+2025-05-13 20:00:03,526 - semgrep.run_scan - VERBOSE - running 1250 rules from 1 config /home/runner/workspace/.config/.semgrep/semgrep_rules.json_0
+2025-05-13 20:00:03,526 - semgrep.run_scan - VERBOSE - No .semgrepignore found. Using default .semgrepignore rules. See the docs for the list of default ignores: https://semgrep.dev/docs/cli-usage/#ignore-files
+2025-05-13 20:00:03,528 - semgrep.run_scan - VERBOSE - Rules:
+2025-05-13 20:00:03,528 - semgrep.run_scan - VERBOSE - <SKIPPED DATA (too many entries; use --max-log-list-entries)>
+2025-05-13 20:00:04,073 - semgrep.core_runner - DEBUG - Passing whole rules directly to semgrep_core
+2025-05-13 20:00:04,282 - semgrep.core_runner - DEBUG - Running Semgrep engine with command:
+2025-05-13 20:00:04,282 - semgrep.core_runner - DEBUG - /tmp/_MEIja5iVe/semgrep/bin/opengrep-core -json -rules /tmp/tmpp30txwbm.json -j 8 -targets /tmp/tmp0zkrnpuv -timeout 5 -timeout_threshold 3 -max_memory 0 -fast
+2025-05-13 20:00:09,340 - semgrep.core_runner - DEBUG - --- semgrep-core stderr ---
+[00.06][[34mINFO[0m]: Executed as: /tmp/_MEIja5iVe/semgrep/bin/opengrep-core -json -rules /tmp/tmpp30txwbm.json -j 8 -targets /tmp/tmp0zkrnpuv -timeout 5 -timeout_threshold 3 -max_memory 0 -fast
+[00.06][[34mINFO[0m]: Version: 1.2.0
+[00.06][[34mINFO[0m]: Parsing rules in /tmp/tmpp30txwbm.json
+[00.81][[34mINFO[0m]: scan: processing 341 files (skipping 0), with 487 rules (skipping 0 )
+[05.01][[34mINFO[0m]: Custom ignore pattern: None
+[05.01][[34mINFO[0m]: Custom ignore pattern: None
+--- end semgrep-core stderr ---
+2025-05-13 20:00:09,347 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('client/index.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 0ee74fd49637bebe183eca7188dbde26e386314e62cc2e7ba1ee60b377b638243fcd84e6c6fa04886198ccacfa6a711bfbcc61a28f9ddc913d5b3c53083cbc90_0
+2025-05-13 20:00:09,348 - semgrep.rule_match - DEBUG - match_key = (' rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" > <script  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" >...</script>', PosixPath('client/index.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = adf34343d6be96447b85230df74b5423013b6f397ca1ee8ccbc07a073ba10f0983c4b0b35a5af316de0d1d48282b1618c59c38f99ebdcc2ee93f24aea49f7101_0
+2025-05-13 20:00:09,348 - semgrep.rule_match - DEBUG - match_key = (' rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" > <script  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" >...</script>', PosixPath('client/index.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = adf34343d6be96447b85230df74b5423013b6f397ca1ee8ccbc07a073ba10f0983c4b0b35a5af316de0d1d48282b1618c59c38f99ebdcc2ee93f24aea49f7101_0
+2025-05-13 20:00:09,349 - semgrep.rule_match - DEBUG - match_key = (' rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" > <script  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" >...</script>', PosixPath('client/index.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = adf34343d6be96447b85230df74b5423013b6f397ca1ee8ccbc07a073ba10f0983c4b0b35a5af316de0d1d48282b1618c59c38f99ebdcc2ee93f24aea49f7101_0
+2025-05-13 20:00:09,349 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('client/index.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 0ee74fd49637bebe183eca7188dbde26e386314e62cc2e7ba1ee60b377b638243fcd84e6c6fa04886198ccacfa6a711bfbcc61a28f9ddc913d5b3c53083cbc90_0
+2025-05-13 20:00:09,349 - semgrep.rule_match - DEBUG - match_key = (' type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js" > <script  type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js" >...</script>', PosixPath('client/index.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 0728b64e224596592d04447ba8a642ff94e1fb9fcc07be26d49dc7e7f6898e638ad16ffcaca086932c58f4c6400fe32603323afef02cf9bfebcb0e4a53562a40_0
+2025-05-13 20:00:09,350 - semgrep.rule_match - DEBUG - match_key = (' type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js" > <script  type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js" >...</script>', PosixPath('client/index.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 0728b64e224596592d04447ba8a642ff94e1fb9fcc07be26d49dc7e7f6898e638ad16ffcaca086932c58f4c6400fe32603323afef02cf9bfebcb0e4a53562a40_0
+2025-05-13 20:00:09,350 - semgrep.rule_match - DEBUG - match_key = (' type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js" > <script  type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js" >...</script>', PosixPath('client/index.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 0728b64e224596592d04447ba8a642ff94e1fb9fcc07be26d49dc7e7f6898e638ad16ffcaca086932c58f4c6400fe32603323afef02cf9bfebcb0e4a53562a40_0
+2025-05-13 20:00:09,351 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('client/src/context/LanguageContext.tsx'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.prototype-pollution.prototype-pollution-loop') match_id = 372aa3a5e4326d372be520bb8af256383e878ffbe4e57ab7a8851f8a0477540d34b1fcf401ef3e1632514571ac6a5c3f83d4934154e6955bb30a3a24a93a8b69_0
+2025-05-13 20:00:09,351 - semgrep.rule_match - DEBUG - match_key = ('"..." (key: float)\n `...${...}...`\n key current = current[key]\n current = current[key] && $Z\n current = current[key] = ...\n current = current[key] || $Z\n $X.forEach(function $NAME($OBJ, key,...) {...})\n $X.forEach(function $NAME(...) {\n  ...\n})\n for(...) {\n  ...\n}\n while(...) {\n  ...\n}\n for(key = $S; ...; ...) {...}\n for(var key = $S; ...; ...) {...}\n', PosixPath('client/src/context/LanguageContext.tsx'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.prototype-pollution.prototype-pollution-loop') match_id = be9d4755b99be686db8baf8f8145cd858d936f9f3fb47bfec1ea217a76e1ed270d265567e976f90ae4f3b4889c162ffc1c794715d23b06e4ef13324618f51916_0
+2025-05-13 20:00:09,351 - semgrep.rule_match - DEBUG - match_key = ('"..." (key: float)\n `...${...}...`\n key current = current[key]\n current = current[key] && $Z\n current = current[key] = ...\n current = current[key] || $Z\n $X.forEach(function $NAME($OBJ, key,...) {...})\n $X.forEach(function $NAME(...) {\n  ...\n})\n for(...) {\n  ...\n}\n while(...) {\n  ...\n}\n for(key = $S; ...; ...) {...}\n for(var key = $S; ...; ...) {...}\n', PosixPath('client/src/context/LanguageContext.tsx'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.prototype-pollution.prototype-pollution-loop') match_id = be9d4755b99be686db8baf8f8145cd858d936f9f3fb47bfec1ea217a76e1ed270d265567e976f90ae4f3b4889c162ffc1c794715d23b06e4ef13324618f51916_0
+2025-05-13 20:00:09,352 - semgrep.rule_match - DEBUG - match_key = ('"..." (key: float)\n `...${...}...`\n key current = current[key]\n current = current[key] && $Z\n current = current[key] = ...\n current = current[key] || $Z\n $X.forEach(function $NAME($OBJ, key,...) {...})\n $X.forEach(function $NAME(...) {\n  ...\n})\n for(...) {\n  ...\n}\n while(...) {\n  ...\n}\n for(key = $S; ...; ...) {...}\n for(var key = $S; ...; ...) {...}\n', PosixPath('client/src/context/LanguageContext.tsx'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.prototype-pollution.prototype-pollution-loop') match_id = be9d4755b99be686db8baf8f8145cd858d936f9f3fb47bfec1ea217a76e1ed270d265567e976f90ae4f3b4889c162ffc1c794715d23b06e4ef13324618f51916_0
+2025-05-13 20:00:09,352 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('client/src/lib/i18n.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.prototype-pollution.prototype-pollution-loop') match_id = e4c1b6b398c2eed8176a9fae396bb660b28572a63fbe0913b572443d0ca5de55c3279d71000ca2df69947cc5b36a7eb532b4d036d5b84122f8e332c661ecc141_0
+2025-05-13 20:00:09,353 - semgrep.rule_match - DEBUG - match_key = ('"..." (part: float)\n `...${...}...`\n part current = current[part]\n current = current[part] && $Z\n current = current[part] = ...\n current = current[part] || $Z\n $X.forEach(function $NAME($OBJ, part,...) {...})\n $X.forEach(function $NAME(...) {\n  ...\n})\n for(...) {\n  ...\n}\n while(...) {\n  ...\n}\n for(part = $S; ...; ...) {...}\n for(var part = $S; ...; ...) {...}\n', PosixPath('client/src/lib/i18n.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.prototype-pollution.prototype-pollution-loop') match_id = 6213d0d40683e6e029104653c5a4f03d2056da3b4c0a37a1172f5a11a92a9bfed24f2665648b024b96d7e7179f679c6f9ccdc794cbd65fe1a340ab6d4ab0b1ae_0
+2025-05-13 20:00:09,353 - semgrep.rule_match - DEBUG - match_key = ('"..." (part: float)\n `...${...}...`\n part current = current[part]\n current = current[part] && $Z\n current = current[part] = ...\n current = current[part] || $Z\n $X.forEach(function $NAME($OBJ, part,...) {...})\n $X.forEach(function $NAME(...) {\n  ...\n})\n for(...) {\n  ...\n}\n while(...) {\n  ...\n}\n for(part = $S; ...; ...) {...}\n for(var part = $S; ...; ...) {...}\n', PosixPath('client/src/lib/i18n.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.prototype-pollution.prototype-pollution-loop') match_id = 6213d0d40683e6e029104653c5a4f03d2056da3b4c0a37a1172f5a11a92a9bfed24f2665648b024b96d7e7179f679c6f9ccdc794cbd65fe1a340ab6d4ab0b1ae_0
+2025-05-13 20:00:09,353 - semgrep.rule_match - DEBUG - match_key = ('"..." (part: float)\n `...${...}...`\n part current = current[part]\n current = current[part] && $Z\n current = current[part] = ...\n current = current[part] || $Z\n $X.forEach(function $NAME($OBJ, part,...) {...})\n $X.forEach(function $NAME(...) {\n  ...\n})\n for(...) {\n  ...\n}\n while(...) {\n  ...\n}\n for(part = $S; ...; ...) {...}\n for(var part = $S; ...; ...) {...}\n', PosixPath('client/src/lib/i18n.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.prototype-pollution.prototype-pollution-loop') match_id = 6213d0d40683e6e029104653c5a4f03d2056da3b4c0a37a1172f5a11a92a9bfed24f2665648b024b96d7e7179f679c6f9ccdc794cbd65fe1a340ab6d4ab0b1ae_0
+2025-05-13 20:00:09,354 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('client/src/lib/i18n.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring') match_id = 08ff81fd83e2cf85bb71b81bc9d63b025a2448054bf32a5c8eaec70beb51abcc4588648cde92df0845e2376e21925d381cfd51ecbb174a0bcff563f578ac60aa_0
+2025-05-13 20:00:09,354 - semgrep.rule_match - DEBUG - match_key = ('"..." + "..."\n $X + $Y $X.concat($Y) `...${...}...`\n $X.concat("...")\n `Error retrieving translation for key "path" $UTIL = require(\'util\')\n...\n $UTIL.format(`Error retrieving translation for key "path",error,...)\n console.error(`Error retrieving translation for key "path",error,...)\n', PosixPath('client/src/lib/i18n.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring') match_id = 8a55b0e294cf295f44e515f64df8f3ce34cdd2b6caab17be29566c8ab086394e6ed61ad778259ee88f3a770fb1743b2f1961cb5452e9e956dc987531cd161236_0
+2025-05-13 20:00:09,355 - semgrep.rule_match - DEBUG - match_key = ('"..." + "..."\n $X + $Y $X.concat($Y) `...${...}...`\n $X.concat("...")\n `Error retrieving translation for key "path" $UTIL = require(\'util\')\n...\n $UTIL.format(`Error retrieving translation for key "path",error,...)\n console.error(`Error retrieving translation for key "path",error,...)\n', PosixPath('client/src/lib/i18n.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring') match_id = 8a55b0e294cf295f44e515f64df8f3ce34cdd2b6caab17be29566c8ab086394e6ed61ad778259ee88f3a770fb1743b2f1961cb5452e9e956dc987531cd161236_0
+2025-05-13 20:00:09,355 - semgrep.rule_match - DEBUG - match_key = ('"..." + "..."\n $X + $Y $X.concat($Y) `...${...}...`\n $X.concat("...")\n `Error retrieving translation for key "path" $UTIL = require(\'util\')\n...\n $UTIL.format(`Error retrieving translation for key "path",error,...)\n console.error(`Error retrieving translation for key "path",error,...)\n', PosixPath('client/src/lib/i18n.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring') match_id = 8a55b0e294cf295f44e515f64df8f3ce34cdd2b6caab17be29566c8ab086394e6ed61ad778259ee88f3a770fb1743b2f1961cb5452e9e956dc987531cd161236_0
+2025-05-13 20:00:09,355 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('server/routes.ts'), 'config..semgrep.vendored-rules.generic.secrets.gitleaks.stripe-access-token') match_id = 1328267d3d7c146be5e86f04196ca52582f5919304787b4a21dc4f0985c5e6313ec8cb186add55bbe8357f46edb3a31bb443d20fd6b4abe1084c6691cdfed079_0
+2025-05-13 20:00:09,356 - semgrep.rule_match - DEBUG - match_key = ('(?i)\\b((sk|rk)_(test|live|prod)_[0-9a-z]{10,99})(?:[\'|\\"|\\n|\\r|\\s|\\x60|;]|$)', PosixPath('server/routes.ts'), 'config..semgrep.vendored-rules.generic.secrets.gitleaks.stripe-access-token') match_id = 7827729529910d7e205a179df465edaf4d58704acd26709684c9397b61e40b4b5c66450eb2248f20ade1f16b8cea9602abc330885e6a4937dd555012954db2af_0
+2025-05-13 20:00:09,356 - semgrep.rule_match - DEBUG - match_key = ('(?i)\\b((sk|rk)_(test|live|prod)_[0-9a-z]{10,99})(?:[\'|\\"|\\n|\\r|\\s|\\x60|;]|$)', PosixPath('server/routes.ts'), 'config..semgrep.vendored-rules.generic.secrets.gitleaks.stripe-access-token') match_id = 7827729529910d7e205a179df465edaf4d58704acd26709684c9397b61e40b4b5c66450eb2248f20ade1f16b8cea9602abc330885e6a4937dd555012954db2af_0
+2025-05-13 20:00:09,357 - semgrep.rule_match - DEBUG - match_key = ('(?i)\\b((sk|rk)_(test|live|prod)_[0-9a-z]{10,99})(?:[\'|\\"|\\n|\\r|\\s|\\x60|;]|$)', PosixPath('server/routes.ts'), 'config..semgrep.vendored-rules.generic.secrets.gitleaks.stripe-access-token') match_id = 7827729529910d7e205a179df465edaf4d58704acd26709684c9397b61e40b4b5c66450eb2248f20ade1f16b8cea9602abc330885e6a4937dd555012954db2af_0
+2025-05-13 20:00:09,357 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('server/routes.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring') match_id = e24e3288a32c9ad4921da20b227a0587a0596856ea79e7c29c73137fde834094f382cf9604ac765ec32471f83cf1196712bec140c3a2b18c933a6c2a040a826f_0
+2025-05-13 20:00:09,357 - semgrep.rule_match - DEBUG - match_key = ('"..." + "..."\n $X + $Y $X.concat($Y) `...${...}...`\n $X.concat("...")\n `Subscription event.type: $UTIL = require(\'util\')\n...\n $UTIL.format(`Subscription event.type:,subscription.id,...)\n console.log(`Subscription event.type:,subscription.id,...)\n', PosixPath('server/routes.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring') match_id = 2eaf9288b01b0a83ad648a1b512a471b1d9a2ce4279636288d40814e6b095a199e18122a9184706f6a5b8d76b45d51b911751fa70629ebdc89a56a7f0ce97bc1_0
+2025-05-13 20:00:09,358 - semgrep.rule_match - DEBUG - match_key = ('"..." + "..."\n $X + $Y $X.concat($Y) `...${...}...`\n $X.concat("...")\n `Subscription event.type: $UTIL = require(\'util\')\n...\n $UTIL.format(`Subscription event.type:,subscription.id,...)\n console.log(`Subscription event.type:,subscription.id,...)\n', PosixPath('server/routes.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring') match_id = 2eaf9288b01b0a83ad648a1b512a471b1d9a2ce4279636288d40814e6b095a199e18122a9184706f6a5b8d76b45d51b911751fa70629ebdc89a56a7f0ce97bc1_0
+2025-05-13 20:00:09,358 - semgrep.rule_match - DEBUG - match_key = ('"..." + "..."\n $X + $Y $X.concat($Y) `...${...}...`\n $X.concat("...")\n `Subscription event.type: $UTIL = require(\'util\')\n...\n $UTIL.format(`Subscription event.type:,subscription.id,...)\n console.log(`Subscription event.type:,subscription.id,...)\n', PosixPath('server/routes.ts'), 'config..semgrep.vendored-rules.javascript.lang.security.audit.unsafe-formatstring') match_id = 2eaf9288b01b0a83ad648a1b512a471b1d9a2ce4279636288d40814e6b095a199e18122a9184706f6a5b8d76b45d51b911751fa70629ebdc89a56a7f0ce97bc1_0
+2025-05-13 20:00:09,361 - semgrep.core_runner - DEBUG - semgrep ran in 0:00:05.288156 on 116 files
+2025-05-13 20:00:09,363 - semgrep.core_runner - DEBUG - findings summary: 4 warning, 0 error, 3 info
+2025-05-13 20:00:09,366 - semgrep.app.auth - DEBUG - Getting API token from settings file
+2025-05-13 20:00:09,366 - semgrep.app.auth - DEBUG - No API token found in settings file
+2025-05-13 20:00:09,367 - semgrep.semgrep_core - DEBUG - Failed to open resource semgrep-core-proprietary: [Errno 2] No such file or directory: '/tmp/_MEIja5iVe/semgrep/bin/semgrep-core-proprietary'.
+2025-05-13 20:00:09,466 - semgrep.output - VERBOSE - 
+========================================
+Files skipped:
+========================================
+
+  Always skipped by Opengrep:
+
+   • <none>
+
+  Skipped by .gitignore:
+  (Disable by passing --no-git-ignore)
+
+   • <all files not listed by `git ls-files` were skipped>
+
+  Skipped by .semgrepignore:
+  - https://semgrep.dev/docs/ignoring-files-folders-code/#understand-semgrep-defaults
+
+   • <none>
+
+  Skipped by --include patterns:
+
+   • <none>
+
+  Skipped by --exclude patterns:
+
+   • <none>
+
+  Files skipped due to insufficient read permissions:
+
+   • <none>
+
+  Skipped by limiting to files smaller than 1000000 bytes:
+  (Adjust with the --max-target-bytes flag)
+
+   • <none>
+
+  Partially analyzed due to parsing or internal Opengrep errors
+
+   • client/index.html (1 lines skipped)
+   • tailwind.config.ts (1 lines skipped)
+
+2025-05-13 20:00:09,467 - semgrep.output - INFO - Some files were skipped or only partially analyzed.
+  Scan was limited to files tracked by git.
+  Partially scanned: 2 files only partially analyzed due to parsing or internal Opengrep errors
+
+Ran 443 rules on 116 files: 7 findings.
+2025-05-13 20:00:09,467 - semgrep.app.version - DEBUG - Version cache does not exist
+2025-05-13 20:00:09,488 - semgrep.metrics - VERBOSE - Not sending pseudonymous metrics since metrics are configured to OFF and registry usage is False
